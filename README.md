@@ -5,7 +5,8 @@ Este proyecto contiene algunas pruebas de integración sobre la API Booking, con
 En este apartado se citan todos los riesgos y los tests que se pueden realizar sobre la función `CreateBooking`.
 
 *Lista de riesgos:*
-- 
+- Riesgo 1:
+- Riesgo 2:
 
 *Lista de tests:*
 - Código de estado: el código de respuesta para la solicitud POST que se ha realizado es 200 (la solicitud se ha realizado correctamente).
