@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.notNullValue;
 
 public class BookingTest {
 
@@ -38,7 +39,7 @@ public class BookingTest {
     }
 
     @Test
-    public void testCreateBooking() {
+    public void testCreateBookingStatusCode() {
         Response response = RestAssured.given()
                 .headers("Content-Type", "application/json", "Accept", "application/json")
                 .and()
@@ -46,6 +47,42 @@ public class BookingTest {
                 .post("/booking");
 
         Assertions.assertEquals(200, response.statusCode());
+
+        /*Assertions.assertEquals(100, 100, "");
+        Assertions.assertEquals("Alejandro", response.jsonPath().getString("booking.firstname"));
+        Assertions.assertEquals("Ávila", response.jsonPath().getString("booking.lastname"));
+        Assertions.assertEquals(122, response.jsonPath().getInt("booking.totalprice"));
+        Assertions.assertEquals(true, response.jsonPath().getBoolean("booking.depositpaid"));
+        Assertions.assertEquals("2018-01-01", response.jsonPath().getString("booking.bookingdates.checkin"));
+        Assertions.assertEquals("2019-01-01", response.jsonPath().getString("booking.bookingdates.checkout"));
+        Assertions.assertEquals("Breakfast", response.jsonPath().getString("booking.additionalneeds"));*/
+    }
+
+    @Test
+    public void testCreateBookingIdNotNull() {
+        RestAssured.given()
+                .headers("Content-Type", "application/json", "Accept", "application/json")
+                .and()
+                .body(requestBody)
+                .post("/booking")
+                .then()
+                .body("bookingid", notNullValue());
+
+        // Si queremos mostrar la respuesta.
+        //response.then().log().all();
+
+        /*System.out.println("Respuesta del servidor: " + response.then().extract().body().asString());
+        System.out.println("Header del servidor: " + response.then().extract().headers().toString());*/
+    }
+
+    @Test
+    public void testCreateExpectedResponse() {
+        Response response = RestAssured.given()
+                .headers("Content-Type", "application/json", "Accept", "application/json")
+                .and()
+                .body(requestBody)
+                .post("/booking");
+
         Assertions.assertEquals("Alejandro", response.jsonPath().getString("booking.firstname"));
         Assertions.assertEquals("Ávila", response.jsonPath().getString("booking.lastname"));
         Assertions.assertEquals(122, response.jsonPath().getInt("booking.totalprice"));
@@ -53,24 +90,6 @@ public class BookingTest {
         Assertions.assertEquals("2018-01-01", response.jsonPath().getString("booking.bookingdates.checkin"));
         Assertions.assertEquals("2019-01-01", response.jsonPath().getString("booking.bookingdates.checkout"));
         Assertions.assertEquals("Breakfast", response.jsonPath().getString("booking.additionalneeds"));
-    }
-
-    @Test
-    public void testCreateBookingCorrectName() {
-
-        RequestSpecification httpRequest = RestAssured.given();
-
-        httpRequest.headers("Content-Type", "application/json", "Accept", "application/json");
-
-        Response response = httpRequest.body(requestBody).post("/booking");
-
-        response.then().body("booking.firstname", equalTo("Alejandro"));
-
-        // Si queremos mostrar la respuesta.
-        //response.then().log().all();
-
-        /*System.out.println("Respuesta del servidor: " + response.then().extract().body().asString());
-        System.out.println("Header del servidor: " + response.then().extract().headers().toString());*/
     }
 
 }
