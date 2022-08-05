@@ -6,7 +6,7 @@ En este apartado se citan todos los riesgos y los tests que se pueden realizar s
 
 *Lista de riesgos:*
 - Exposición de datos sensibles: hay que ir con cuidado con los datos que subimos al servidor de Booking.
-- Riesgo 2:
+- No requiere autentificación
 
 *Lista de tests:*
 - Código de respuesta: verificar que la aplicación ha realizado correctamente la solicitud y devuelva el resultado exitoso: 200 HTTP (código de respuesta).
