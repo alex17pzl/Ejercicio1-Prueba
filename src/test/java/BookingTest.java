@@ -27,17 +27,6 @@ public class BookingTest {
     }
 
     @Test
-    public void testGetBooking() {
-        String body = RestAssured.given()
-                .when().get("")
-                .then()
-                    .statusCode(200)
-                .extract().body().asString();
-
-        System.out.println(body);
-    }
-
-    @Test
     public void testCreateBookingStatusCode() {
         Response response = RestAssured.given()
                 .headers("Content-Type", "application/json", "Accept", "application/json")
