@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.*;
 
 public class BookingTest {
 
@@ -58,6 +57,33 @@ public class BookingTest {
                 .post("/booking")
                 .then()
                 .body("bookingid", notNullValue());
+    }
+
+    @Test
+    public void testCreateExpectedFields() {
+        RestAssured.given()
+                .headers("Content-Type", "application/json", "Accept", "application/json")
+                .and()
+                .body(requestBody)
+                .post("/booking")
+                .then()
+                .body("$", hasKey("bookingid"))
+                .and()
+                .body("$", hasKey("booking"))
+                .and()
+                .body("booking", hasKey("firstname"))
+                .and()
+                .body("booking", hasKey("lastname"))
+                .and()
+                .body("booking", hasKey("totalprice"))
+                .and()
+                .body("booking", hasKey("depositpaid"))
+                .and()
+                .body("booking", hasKey("bookingdates"))
+                .and()
+                .body("booking.bookingdates", hasKey("checkin"))
+                .and()
+                .body("booking.bookingdates", hasKey("checkout"));
     }
 
     @Test
