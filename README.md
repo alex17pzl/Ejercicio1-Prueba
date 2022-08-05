@@ -9,8 +9,9 @@ En este apartado se citan todos los riesgos y los tests que se pueden realizar s
 - Riesgo 2:
 
 *Lista de tests:*
-- Código de estado: el código de respuesta para la solicitud POST que se ha realizado es 200 (la solicitud se ha realizado correctamente).
-- 
+- Código de respuesta: verificar que la aplicación ha realizado correctamente la solicitud y devuelva el resultado exitoso: 200 HTTP (código de respuesta).
+- BookingId no nulo: verificar que se crea una reserva nueva en la API con id no nulo.
+- Respuesta esperada: verificar que los datos de respuestas son los esperados por el usuario (nombre, apellido, precio total, ...).
 
 ## Parte 2 - Automatizar las pruebas
 Partiendo de la lista anterior de tests, se han automatizado las pruebas usando el lenguaje Java, concretamente usando JUnit y Rest Assured.
